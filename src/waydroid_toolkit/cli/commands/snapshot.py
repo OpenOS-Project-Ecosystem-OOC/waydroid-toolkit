@@ -23,7 +23,8 @@ def snapshot_auto() -> None:
 
 @snapshot_auto.command("set")
 @click.argument("schedule")
-@click.option("--expiry", default="", help="Auto-delete snapshots after this duration (e.g. 7d, 30d, 24h).")
+@click.option("--expiry", default="",
+              help="Auto-delete snapshots after this duration (e.g. 7d, 30d, 24h).")
 @click.option("--pattern", default="snap-%d", show_default=True,
               help="Naming pattern for auto-snapshots (%d replaced by a counter).")
 def auto_set(schedule: str, expiry: str, pattern: str) -> None:
@@ -38,7 +39,7 @@ def auto_set(schedule: str, expiry: str, pattern: str) -> None:
     except (RuntimeError, NotImplementedError) as e:
         console.print(f"[red]{e}[/red]")
         raise SystemExit(1)
-    console.print(f"[green]Auto-snapshot configured[/green]")
+    console.print("[green]Auto-snapshot configured[/green]")
     console.print(f"  Schedule : {schedule}")
     console.print(f"  Pattern  : {pattern}")
     if expiry:
